@@ -6,17 +6,17 @@ class Movie {
 
   getMovies() {
     fetch(this.apiUrl, { method: "GET" })
-      .then(function(value) {
-        return value.json();
-      })
-      .then(function(response) {
-        console.log(response);
+      .then(value => value.json())
+      .then(response => {
+        let { results } = response;
         let renderArea = document.getElementById("app");
-        let movieResult = response.results.map(value => {
+        let movieResult = results.map(value => {
           return `<h1>${value.title}</h1>
           <p>${value.release_date}</p>`;
         });
-        movieResult.forEach(data => {
+        movieResult.forEach((data, idx, arr) => {
+          // console.log("data", data);
+          // console.log("idx", idx);
           renderArea.innerHTML += data;
         });
       });
@@ -24,3 +24,6 @@ class Movie {
 }
 let movieObj = new Movie();
 movieObj.getMovies();
+
+let a= 'hari';
+console.log([...a, 123])
